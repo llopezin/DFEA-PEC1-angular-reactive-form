@@ -1,0 +1,36 @@
+<form method="post" [formGroup]=loginForm (ngSubmit)="login()">
+
+    <label for="login-form__name">Name:</label>
+    <input type="text" id="#login-form__name" [formControl]="name">
+    <span class="login-form__name-validation form__error"
+        *ngIf="loginForm.get('name').errors && (loginForm.get('name').touched || loginForm.get('name').dirty)"><span
+            class="form_error" *ngIf="loginForm.get('name').errors.required">
+            Name is required
+        </span><span class="form_error" *ngIf="loginForm.get('name').errors.minlength">
+            Name must be at least {{loginForm.get("name").errors.minlength.requiredLength}} characters long
+        </span></span>
+
+    <label for="login-form__surname">Surname:</label>
+    <input type="text" id="#login-form__surname" [formControl]="surname">
+    <span class="login-form__surname-validation form__error"
+        *ngIf="loginForm.get('surname').errors && (loginForm.get('surname').touched || loginForm.get('surname').dirty)"><span
+            class="form_error" *ngIf="loginForm.get('surname').errors.required">
+            surname is required
+        </span><span class="form_error" *ngIf="loginForm.get('surname').errors.minlength">
+            Surname must be at least {{loginForm.get("surname").errors.minlength.requiredLength}} characters long
+        </span></span>
+
+    <label for="login-form__password">Password:</label>
+    <input type="text" id="#login-form__password" [formControl]="password">
+    <span class="login-form__password-validation form__error"
+        *ngIf="loginForm.get('password').errors && (loginForm.get('password').touched || loginForm.get('password').dirty)">Password
+        invalid</span>
+
+
+    <!--     <label for="login-form__blank">blank:</label>
+    <input type="text" name="blank" id="#login-form__blank" [formControl]=>
+    <span class="login-form__blank-validation">blank invalid</span> -->
+
+    <input type="submit">
+
+</form>
