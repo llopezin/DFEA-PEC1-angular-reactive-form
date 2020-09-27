@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { checkWord } from 'src/app/directives/custom-validators.ts/checkWord.validator copy';
+import { matchingFields } from 'src/app/directives/custom-validators.ts/matchingFields.validator';
 
 @Component({
   selector: 'app-login-form',
@@ -37,6 +38,7 @@ export class LoginFormComponent implements OnInit {
     this.surname = new FormControl('', [
       Validators.required,
       Validators.minLength(5),
+      matchingFields.match(this.name),
     ]);
     this.email = new FormControl('', [Validators.required]);
     this.password = new FormControl('', [Validators.required]);
@@ -45,7 +47,7 @@ export class LoginFormComponent implements OnInit {
       Validators.maxLength(10),
     ]);
     this.telephone = new FormControl('', [Validators.required]);
-    this.age = new FormControl('', [Validators.required]);
+    this.age = new FormControl('', [Validators.required, Validators.min(18)]);
     this.description = new FormControl('', [Validators.maxLength(200)]);
 
     this.loginForm = this.formBuilder.group({
@@ -73,5 +75,7 @@ export class LoginFormComponent implements OnInit {
     this.user.description = this.description.value;
     this.user.description = this.description.value;
     console.log(this.user);
+    console.log(this.name.errors);
+    console.log(this.surname.errors);
   }
 }

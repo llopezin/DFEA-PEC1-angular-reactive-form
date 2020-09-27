@@ -12,6 +12,10 @@
         <span class="form__validation-message" *ngIf="loginForm.get('name').errors.invalidWord">
             '{{loginForm.get("name").errors.invalidWord.word}}' is not a valid name.
         </span>
+        <span class="form__validation-message"
+            *ngIf="loginForm.get('surname').errors.fieldMatch && (loginForm.get('surname').touched || loginForm.get('surname').dirty)">
+            Name and surname must be different
+        </span>
     </span>
 
     <label for="login-form__surname">Surname:</label>
@@ -22,7 +26,12 @@
             Surname is required
         </span><span class="form__validation-message" *ngIf="loginForm.get('surname').errors.minlength">
             Surname must be at least {{loginForm.get("surname").errors.minlength.requiredLength}} characters long
-        </span></span>
+        </span>
+        <span class="form__validation-message"
+            *ngIf="loginForm.get('surname').errors.fieldMatch && (loginForm.get('name').touched || loginForm.get('name').dirty)">
+            Name and surname must be different
+        </span>
+    </span>
 
     <label for="login-form__email">Email:</label>
     <input type="email" name="email" id="#login-form__email" [formControl]="email">
@@ -53,8 +62,14 @@
     <label for="login-form__age">Age:</label>
     <input type="number" name="age" id="#login-form__age" [formControl]="age">
     <span class="form__validation-message"
-        *ngIf="loginForm.get('age').errors && (loginForm.get('age').touched || loginForm.get('age').dirty)">Age
-        is required</span>
+        *ngIf="loginForm.get('age').errors && (loginForm.get('age').touched || loginForm.get('age').dirty)"><span
+            class="form__validation-message" *ngIf="loginForm.get('age').errors.required">
+            Age is required
+        </span>
+        <span class="form__validation-message" *ngIf="loginForm.get('age').errors.min">
+            You must be over 18 to join
+        </span>
+    </span>
 
     <label for="login-form__description">Description:</label>
     <textarea name="description" id="#login-form__description" [formControl]="description" cols="30"
