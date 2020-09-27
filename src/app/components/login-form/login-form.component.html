@@ -13,7 +13,7 @@
             '{{loginForm.get("name").errors.invalidWord.word}}' is not a valid name.
         </span>
         <span class="form__validation-message"
-            *ngIf="loginForm.get('surname').errors.fieldMatch && (loginForm.get('surname').touched || loginForm.get('surname').dirty)">
+            *ngIf="loginForm.errors?.fieldMatch && (loginForm.get('surname').touched || loginForm.get('surname').dirty)">
             Name and surname must be different
         </span>
     </span>
@@ -28,7 +28,7 @@
             Surname must be at least {{loginForm.get("surname").errors.minlength.requiredLength}} characters long
         </span>
         <span class="form__validation-message"
-            *ngIf="loginForm.get('surname').errors.fieldMatch && (loginForm.get('name').touched || loginForm.get('name').dirty)">
+            *ngIf="loginForm.errors?.fieldMatch && (loginForm.get('name').touched || loginForm.get('name').dirty)">
             Name and surname must be different
         </span>
     </span>

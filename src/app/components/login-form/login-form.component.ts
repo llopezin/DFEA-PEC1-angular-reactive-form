@@ -35,10 +35,12 @@ export class LoginFormComponent implements OnInit {
       Validators.minLength(5),
       checkWord.checkInvalidWord(/administrator/i),
     ]);
+
+    console.log(this.name);
+
     this.surname = new FormControl('', [
       Validators.required,
       Validators.minLength(5),
-      matchingFields.match(this.name),
     ]);
     this.email = new FormControl('', [Validators.required]);
     this.password = new FormControl('', [Validators.required]);
@@ -50,16 +52,19 @@ export class LoginFormComponent implements OnInit {
     this.age = new FormControl('', [Validators.required, Validators.min(18)]);
     this.description = new FormControl('', [Validators.maxLength(200)]);
 
-    this.loginForm = this.formBuilder.group({
-      name: this.name,
-      surname: this.surname,
-      email: this.email,
-      password: this.password,
-      date: this.date,
-      telephone: this.telephone,
-      age: this.age,
-      description: this.description,
-    });
+    this.loginForm = this.formBuilder.group(
+      {
+        name: this.name,
+        surname: this.surname,
+        email: this.email,
+        password: this.password,
+        date: this.date,
+        telephone: this.telephone,
+        age: this.age,
+        description: this.description,
+      },
+      { validators: matchingFields.match([this.name, this.surname]) }
+    );
 
     //this.loginForm.valueChanges.subscribe(console.log);
   }
