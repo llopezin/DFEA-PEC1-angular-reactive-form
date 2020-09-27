@@ -6,6 +6,7 @@ import {
   FormBuilder,
   Validators,
 } from '@angular/forms';
+import { checkWord } from 'src/app/directives/custom-validators.ts/checkWord.validator copy';
 
 @Component({
   selector: 'app-login-form',
@@ -17,8 +18,13 @@ export class LoginFormComponent implements OnInit {
 
   public loginForm: FormGroup;
   public name: FormControl;
-  public password: FormControl;
   public surname: FormControl;
+  public email: FormControl;
+  public password: FormControl;
+  public date: FormControl;
+  public telephone: FormControl;
+  public age: FormControl;
+  public description: FormControl;
 
   constructor(private formBuilder: FormBuilder) {}
 
@@ -26,17 +32,31 @@ export class LoginFormComponent implements OnInit {
     this.name = new FormControl('', [
       Validators.required,
       Validators.minLength(5),
+      checkWord.checkInvalidWord(/administrator/i),
     ]);
-    this.password = new FormControl('', [Validators.required]);
     this.surname = new FormControl('', [
       Validators.required,
       Validators.minLength(5),
     ]);
+    this.email = new FormControl('', [Validators.required]);
+    this.password = new FormControl('', [Validators.required]);
+    this.date = new FormControl('', [
+      Validators.pattern(/([12]\d{3}-\d{2}-\d{2})/),
+      Validators.maxLength(10),
+    ]);
+    this.telephone = new FormControl('', [Validators.required]);
+    this.age = new FormControl('', [Validators.required]);
+    this.description = new FormControl('', [Validators.maxLength(200)]);
 
     this.loginForm = this.formBuilder.group({
       name: this.name,
-      password: this.password,
       surname: this.surname,
+      email: this.email,
+      password: this.password,
+      date: this.date,
+      telephone: this.telephone,
+      age: this.age,
+      description: this.description,
     });
 
     //this.loginForm.valueChanges.subscribe(console.log);
@@ -45,8 +65,13 @@ export class LoginFormComponent implements OnInit {
   public login() {
     this.user.name = this.name.value;
     this.user.surname = this.surname.value;
+    this.user.email = this.email.value;
     this.user.password = this.password.value;
+    this.user.date = this.date.value;
+    this.user.telephone = this.telephone.value;
+    this.user.age = this.age.value;
+    this.user.description = this.description.value;
+    this.user.description = this.description.value;
     console.log(this.user);
-    console.log(this.name.errors);
   }
 }

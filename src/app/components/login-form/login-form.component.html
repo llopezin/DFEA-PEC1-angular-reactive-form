@@ -2,35 +2,67 @@
 
     <label for="login-form__name">Name:</label>
     <input type="text" id="#login-form__name" [formControl]="name">
-    <span class="login-form__name-validation form__error"
+    <span class="form__validation-message"
         *ngIf="loginForm.get('name').errors && (loginForm.get('name').touched || loginForm.get('name').dirty)"><span
-            class="form_error" *ngIf="loginForm.get('name').errors.required">
+            class="form__validation-message" *ngIf="loginForm.get('name').errors.required">
             Name is required
-        </span><span class="form_error" *ngIf="loginForm.get('name').errors.minlength">
+        </span><span class="form__validation-message" *ngIf="loginForm.get('name').errors.minlength">
             Name must be at least {{loginForm.get("name").errors.minlength.requiredLength}} characters long
-        </span></span>
+        </span>
+        <span class="form__validation-message" *ngIf="loginForm.get('name').errors.invalidWord">
+            '{{loginForm.get("name").errors.invalidWord.word}}' is not a valid name.
+        </span>
+    </span>
 
     <label for="login-form__surname">Surname:</label>
     <input type="text" id="#login-form__surname" [formControl]="surname">
-    <span class="login-form__surname-validation form__error"
+    <span
         *ngIf="loginForm.get('surname').errors && (loginForm.get('surname').touched || loginForm.get('surname').dirty)"><span
-            class="form_error" *ngIf="loginForm.get('surname').errors.required">
-            surname is required
-        </span><span class="form_error" *ngIf="loginForm.get('surname').errors.minlength">
+            class="form__validation-message" *ngIf="loginForm.get('surname').errors.required">
+            Surname is required
+        </span><span class="form__validation-message" *ngIf="loginForm.get('surname').errors.minlength">
             Surname must be at least {{loginForm.get("surname").errors.minlength.requiredLength}} characters long
         </span></span>
 
+    <label for="login-form__email">Email:</label>
+    <input type="email" name="email" id="#login-form__email" [formControl]="email">
+    <span class="form__validation-message"
+        *ngIf="loginForm.get('email').errors && (loginForm.get('email').touched || loginForm.get('email').dirty)">Email
+        is required</span>
+
     <label for="login-form__password">Password:</label>
-    <input type="text" id="#login-form__password" [formControl]="password">
-    <span class="login-form__password-validation form__error"
+    <input type="password" id="#login-form__password" [formControl]="password">
+    <span class="form__validation-message"
         *ngIf="loginForm.get('password').errors && (loginForm.get('password').touched || loginForm.get('password').dirty)">Password
         invalid</span>
 
+    <label for="login-form__date" placeholder="DD/MM/YYYY">Date:</label>
+    <input type="date" id="#login-form__date" [formControl]="date">
+    <span class="form__validation-message"
+        *ngIf="loginForm.get('date').errors && (loginForm.get('date').touched || loginForm.get('date').dirty)">Invalid
+        format</span>
 
-    <!--     <label for="login-form__blank">blank:</label>
-    <input type="text" name="blank" id="#login-form__blank" [formControl]=>
-    <span class="login-form__blank-validation">blank invalid</span> -->
 
-    <input type="submit">
+    <label for="login-form__telephone">Telephone number:</label>
+    <input type="number" name="telephone" id="#login-form__telephone" [formControl]="telephone">
+    <span class="form__validation-message"
+        *ngIf="loginForm.get('telephone').errors && (loginForm.get('telephone').touched || loginForm.get('telephone').dirty)">Telephone
+        number
+        is required</span>
+
+    <label for="login-form__age">Age:</label>
+    <input type="number" name="age" id="#login-form__age" [formControl]="age">
+    <span class="form__validation-message"
+        *ngIf="loginForm.get('age').errors && (loginForm.get('age').touched || loginForm.get('age').dirty)">Age
+        is required</span>
+
+    <label for="login-form__description">Description:</label>
+    <textarea name="description" id="#login-form__description" [formControl]="description" cols="30"
+        rows="5"></textarea>
+    <span class="form__validation-message"
+        *ngIf="loginForm.get('description').errors && (loginForm.get('description').touched || loginForm.get('description').dirty)">Maximum
+        length 200 characters</span>
+
+    <input [disabled]="!loginForm.valid" type="submit">
 
 </form>
